@@ -1,0 +1,213 @@
+% mnras_template.tex 
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.3 released April 2024
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.3 April 2024
+%   Updated \pubyear to print the current year automatically
+% v3.2 July 2023
+%	Updated guidance on use of amssymb package
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+
+% Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by "N" and "L" etc. in the bibliography.
+% Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Avoid using amssymb if newtxmath is enabled, as these packages can cause conflicts. newtxmatch covers the same math symbols while producing a consistent Times New Roman font. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Abbreviated referencing macros
+\newcommand{\app}[1]{Appendix~\ref{sec:#1}}
+\newcommand{\eq}[1]{Equation~\ref{eq:#1}}
+\newcommand{\fig}[1]{Figure~\ref{fig:#1}}
+\renewcommand{\sec}[1]{Section~\ref{sec:#1}}
+\newcommand{\tab}[1]{Table~\ref{tab:#1}}
+\newcommand{\App}[1]{Appendix~\ref{sec:#1}}
+\newcommand{\Eq}[1]{Equation~\ref{eq:#1}}
+\newcommand{\Fig}[1]{Figure~\ref{fig:#1}}
+\newcommand{\Sec}[1]{Section~\ref{sec:#1}}
+\newcommand{\Tab}[1]{Table~\ref{tab:#1}}
+\newcommand{\ndd}{in prep.}
+% Names of things
+\newcommand{\bluetides}{{\sc BlueTides}}
+\newcommand{\webb}{{\em Webb}}
+\newcommand{\HST}{{\em HST}}
+\newcommand{\hubble}{{\em Hubble}}
+\newcommand{\spitzer}{{\em Spitzer}}
+
+\newcommand{\ceagle}{\mbox{\sc{C-Eagle}}}
+\newcommand{\eagle}{\mbox{\sc{Eagle}}}
+\newcommand{\lgals}{\mbox{\sc{L-Galaxies}}}
+\newcommand{\euclid}{\mbox{\it Euclid}}
+\newcommand{\flares}{\mbox{\sc Flares}}
+\newcommand{\flare}{\mbox{\sc Flare}}
+
+% Other abbreviations
+\newcommand{\SFR}{\mathrm{SFR}}
+\newcommand{\zoom}{\mbox{zoom}}
+\newcommand{\cloudy}{{\sc cloudy}}
+
+% Units
+\newcommand{\Lsun}{\mbox{L$_\odot$}}
+\newcommand{\Msun}{\mbox{M$_\odot$}}
+\newcommand{\cMpch}{h$^{-1}$ cMpc}
+
+\newcommand{\todo}[1]{{\color{green}***#1***}}
+\newcommand{\will}[1]{{\color{purple}***#1***}}
+\newcommand{\chris}[1]{{\color{orange}***#1***}}
+\newcommand{\peter}[1]{{\color{green}***#1***}}
+\newcommand{\steve}[1]{{\color{magenta}***#1***}}
+\newcommand{\aswin}[1]{{\color{teal}***#1***}}
+\newcommand{\changed}[2]{{\color{red}\sout{#1}}{\color{blue}#2}}
+\newcommand{\ammended}[1]{{#1}}
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[FLARES N]{First Light And Reionisation Epoch (FLARES) N: An abundance of simulated Little Red Dots}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[William J. Roper et al.]{William J. Roper$^{1}$\thanks{E-mail: w.roper@sussex.ac.uk}, %0000-0002-3257-8806
+Christopher C. Lovell$^{2}$, % OrCiD: 0000-0001-7964-5933 Christopher c.lovell@herts.ac.uk
+Aswin P. Vijayan$^{1}$, % Orcid: 0000-0002-1905-4194 apavi@space.dtu.dk
+Louise T. C. Seeyave$^{1}$, %0000-0002-7020-3079 %L.Seeyave@sussex.ac.uk
+\newauthor
+Peter A. Thomas$^{1}$, % 0000-0001-6888-6483 p.a.thomas@sussex.ac.uk
+Stephen M. Wilkins$^{1,6}$ %0000-0003-3903-6935 s.wilkins@sussex.ac.uk
+\\
+% List of institutions
+$^{1}$Astronomy Centre, University of Sussex, Falmer, Brighton BN1 9QH, UK\\
+$^{2}$Institute of Cosmology and Gravitation, University of Portsmouth, Burnaby Road, Portsmouth PO1 3FX, UK}
+
+% These dates will be filled out by the publisher
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+% Prints the current year, for the copyright statements etc. To achieve a fixed year, replace the expression with a number. 
+\pubyear{\the\year{}}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+Look at all our Little red dots.
+\end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+keyword1 -- keyword2 -- keyword3
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\input{Sections/intro}
+
+\input{Sections/simulation}
+
+\input{Sections/pure_stellar}
+
+\input{Sections/combined}
+
+\input{Sections/conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Data Availability}
+
+We have data and repos...
+
+\section*{Acknowledgements}
+
+We thank the \eagle\ team for their efforts in developing the \eagle\ simulation code.
+We also wish to acknowledge the following open source software packages used in the analysis: \textsf{scipy} \citep{2020SciPy-NMeth}, \textsf{Astropy} \citep{robitaille_astropy:_2013}, and \textsf{matplotlib} \citep{Hunter:2007}.
+
+This work used the DiRAC@Durham facility managed by the Institute for Computational Cosmology on behalf of the STFC DiRAC HPC Facility (www.dirac.ac.uk).
+The equipment was funded by BEIS capital funding via STFC capital grants ST/K00042X/1, ST/P002293/1, ST/R002371/1 and ST/S002502/1, Durham University and STFC operations grant ST/R000832/1.
+DiRAC is part of the National e-Infrastructure. The \eagle\ simulations were performed using the DiRAC-2 facility at Durham, managed by the ICC, and the PRACE facility Curie based in France at TGCC, CEA, Bruyeres-le-Chatel.
+
+WJR acknowledges support from an STFC consolidated grant... 
+CCL acknowledges support from a Dennis Sciama fellowship funded by the University of Portsmouth for the Institute of Cosmology and Gravitation.
+
+We list here the roles and contributions of the authors according to the Contributor Roles Taxonomy (CRediT)\footnote{\url{https://credit.niso.org/}}.
+\textbf{William J. Roper}: Conceptualization, Data curation, Methodology, Investigation, Formal Analysis, Visualization, Writing - original draft.
+\textbf{Christopher C. Lovell, Aswin P. Vijayan}: Data curation, Writing - review \& editing.
+\textbf{Louise Seeyave}: Writing - review \& editing.
+Writing - review \& editing.
+\textbf{Stephen M. Wilkins}: Conceptualization, Writing - review \& editing.
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+% The best way to enter references is to use BibTeX:
+
+\bibliographystyle{mnras}
+\bibliography{flares} % if your bibtex file is called example.bib
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
+
+%\appendix
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
